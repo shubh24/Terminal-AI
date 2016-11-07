@@ -32,6 +32,20 @@ def parse(api_res):
 			city = api_res["result"]["fulfillment"]["speech"]
 			execute.GetWeather(city)
 
+		elif intentName == "ReminderWithin":
+			task = api_res["result"]["parameters"]["Task"]
+			duration_val = api_res["result"]["parameters"]["duration"]["amount"]
+			duration_unit = api_res["result"]["parameters"]["duration"]["unit"]
+
+			execute.ReminderWithin(task, duration_val, duration_unit)
+
+		elif intentName == "ReminderSpecific":
+			task = api_res["result"]["parameters"]["Task"]
+			date = api_res["result"]["parameters"]["date"]
+			time = api_res["result"]["parameters"]["time"]
+
+			execute.ReminderSpecific(task, time, date)
+
 	elif api_res["result"]["source"] == "domains":
 
 		speak(api_res["result"]["fulfillment"]["speech"])
