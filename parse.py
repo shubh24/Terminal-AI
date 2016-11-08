@@ -46,6 +46,22 @@ def parse(api_res):
 
 			execute.ReminderSpecific(task, time, date)
 
+		elif intentName == "ToDo":
+			task = api_res["result"]["parameters"]["Task"]
+			priority = api_res["result"]["parameters"]["priority"]
+
+			execute.ToDo(task, priority)
+
+		elif intentName == "CheckOff":
+			task_index = api_res["result"]["parameters"]["number-integer"]
+
+			execute.CheckOff(task_index)
+
+		elif intentName == "ShowToDo":
+			execute.ShowToDo()
+
+
+
 	elif api_res["result"]["source"] == "domains":
 
 		speak(api_res["result"]["fulfillment"]["speech"])

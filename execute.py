@@ -4,6 +4,7 @@ import webbrowser
 import requests 
 import json
 import subprocess
+import time
 
 def OpenWebsite(website):
 
@@ -62,4 +63,46 @@ def ReminderSpecific(task, time, date):
 	
 	os.system(cmd)
 
+def ToDo(task, priority):
+
+	if priority == "priority very high":
+		priority = "veryhigh"
+	elif priority == "priority high":
+		priority = "high"
+	elif priority == "priority medium":
+		priority = "medium"
+	elif priority == "priority low":
+		priority = "low"
+	elif priority == "priority very low":
+		priority = "verylow"
+
+	cmd = "todo -a %s -p %s"%(task, priority)
+
+	os.system(cmd)
+	speak("The task is added!")
+	
+def CheckOff(task_index):
+
+	cmd = "tdr %s"%(task_index)
+	os.system(cmd)
+
+	speak("Task %s checked off!"%(task_index))
+
+def ShowToDo():
+
+	(stdout, stderr) = subprocess.Popen(["todo"], stdout=subprocess.PIPE).communicate()
+
+	if stderr != "":
+		tasks = stdout.split("\n")
+
+		for task in tasks:
+			if task == "":
+				continue
+
+			(index, content) = task.split(".")
+			speak("Task %s, %s"%(index, content))
+			time.sleep(1)
+
+	else:
+		speak("Some bugs in my to-do! Try evernote!")
 
