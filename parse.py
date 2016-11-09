@@ -60,7 +60,13 @@ def parse(api_res):
 		elif intentName == "ShowToDo":
 			execute.ShowToDo()
 
+		elif intentName == "HackerNewsTop":
+			execute.HackerNewsTop()
 
+		elif intentName == "HackerNewsView":
+			news_index = api_res["result"]["parameters"]["number-integer"]
+
+			execute.HackerNewsView(news_index)
 
 	elif api_res["result"]["source"] == "domains":
 

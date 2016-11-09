@@ -80,7 +80,7 @@ def ToDo(task, priority):
 
 	os.system(cmd)
 	speak("The task is added!")
-	
+
 def CheckOff(task_index):
 
 	cmd = "tdr %s"%(task_index)
@@ -106,3 +106,20 @@ def ShowToDo():
 	else:
 		speak("Some bugs in my to-do! Try evernote!")
 
+def HackerNewsTop():
+
+	cmd = "hn top > hn.txt"
+	os.system(cmd)
+
+	with open("hn.txt", "r") as f:
+		text = f.read()	
+
+	# print text.split("    ")
+
+def HackerNewsView(news_index):
+
+	cmd = "hn view -b %s"%(news_index)
+	os.system(cmd)
+
+
+HackerNewsTop()
