@@ -111,10 +111,13 @@ def HackerNewsTop():
 	cmd = "hn top > hn.txt"
 	os.system(cmd)
 
+	c = 0
 	with open("hn.txt", "r") as f:
-		text = f.read()	
-
-	# print text.split("    ")
+		for i in f.readlines():
+			c += 1
+			if c%2 == 1:
+				speak(i)	
+				time.sleep(7)
 
 def HackerNewsView(news_index):
 
